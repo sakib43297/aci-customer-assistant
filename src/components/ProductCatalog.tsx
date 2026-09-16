@@ -8,6 +8,7 @@ import {
   STORE_EVENTS 
 } from '../utils/store';
 import { Search, ShoppingCart, Info, Filter, Sparkles, Check, Mic, MicOff, Loader2, Volume2, X, Tag, TrendingDown, AlertCircle } from 'lucide-react';
+import { apiRequest } from '../context/AuthContext';
 
 interface ProductCatalogProps {
   onAddToCart: (product: Product, quantity: number) => void;
@@ -193,21 +194,13 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
       reader.onloadend = async () => {
         try {
           const base64Data = (reader.result as string).split(',')[1];
-          const response = await fetch('/api/voice-search', {
+          const data = await apiRequest('/api/voice-search', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               audio: base64Data,
               mimeType: audioBlob.type,
             }),
           });
-
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Voice transcription failed: ${errorText}`);
-          }
-
-          const data = await response.json();
           const queryResult = data.text;
 
           if (!queryResult || queryResult === 'empty_audio') {

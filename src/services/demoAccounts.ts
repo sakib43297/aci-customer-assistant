@@ -83,7 +83,9 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
 // Keep this helper as a compatibility shim for the existing UI controls.
 export async function seedDemoAccountsToLocal(): Promise<{ success: boolean; count: number; error?: string }> {
   try {
-    const response = await fetch('/api/seed-demo-accounts', { method: 'POST' });
+    const csrfResponse = await fetch('/api/auth/csrf', { credentials: 'include' });
+    const csrf = await csrfResponse.json();
+    const response = await fetch('/api/seed-demo-accounts', { method: 'POST', credentials: 'include', headers: { 'X-CSRF-Token': csrf.csrfToken } });
     const data = await response.json();
     return { success: Boolean(data.success), count: Number(data.count || DEMO_ACCOUNTS.length), error: data.error };
   } catch (error: any) {

@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { getRepresentativeForBusiness, BUSINESS_REPRESENTATIVES } from '../data/representatives';
 import { ProductDetailModal } from './ProductDetailModal';
+import { apiRequest } from '../context/AuthContext';
 
 interface ChatAssistantProps {
   onAddToCart: (product: Product, quantity: number) => void;
@@ -141,20 +142,13 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const data = await apiRequest('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
           history: messages.slice(-10) // Send last 10 messages for context
         })
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to get response from AI assistant.');
-      }
-
-      const data = await response.json();
       
       const botMsg: ChatMessage = {
         id: `assistant-${Date.now()}`,
