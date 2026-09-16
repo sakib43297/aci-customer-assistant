@@ -29,8 +29,8 @@ paths are restricted at Nginx.
 
 1. Set deployment values in a shell or local `.env` file, especially
    `ADMIN_PASSWORD`, `JWT_SECRET`, and `GRAFANA_ADMIN_PASSWORD`.
-2. Build and start the stack:
-   `docker compose up --build -d`
+2. Authenticate to `registry.acimisai.com`, pull the tagged image, and start the stack:
+   `docker compose pull && docker compose up -d --force-recreate`
 3. Verify the public endpoint:
    `curl http://localhost:2312/api/health`
 
