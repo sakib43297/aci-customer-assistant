@@ -129,7 +129,7 @@ function getGeminiClient(): GoogleGenAI | null {
     apiKey: configuredKey,
     httpOptions: {
       headers: {
-        'User-Agent': 'aistudio-build',
+        'User-Agent': 'aci-customer-assistant',
       }
     }
   });

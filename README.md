@@ -1,12 +1,6 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
-
 # ACI Customer Assistant
 
 ACI Customer Assistant is a full-stack ACI product ordering and customer support platform with an administrator sales ledger and Gemini-powered demand forecasting.
-
-View your app in AI Studio: https://ai.studio/apps/48c5bf29-ca12-453c-8697-c1331e087ad9
 
 ## Run Locally
 
