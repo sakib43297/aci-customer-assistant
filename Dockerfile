@@ -1,4 +1,6 @@
-FROM node:22-bookworm-slim AS build
+# Compile on the builder's native platform; the runtime image is still selected
+# by buildx's --platform linux/amd64 flag.
+FROM --platform=$BUILDPLATFORM node:22-bookworm-slim AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
