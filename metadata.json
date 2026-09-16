@@ -1,0 +1,10 @@
+{
+  "name": "ACI Customer Assistant",
+  "description": "Professional product ordering, customer support, sales intelligence, and Gemini-powered forecasting for ACI.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
