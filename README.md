@@ -1,12 +1,6 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
-
 # ACI Customer Assistant
 
 ACI Customer Assistant is a full-stack ACI product ordering and customer support platform with an administrator sales ledger and Gemini-powered demand forecasting.
-
-View your app in AI Studio: https://ai.studio/apps/48c5bf29-ca12-453c-8697-c1331e087ad9
 
 ## Run Locally
 
@@ -30,12 +24,13 @@ paths are restricted at Nginx.
 1. Set deployment values in a shell or local `.env` file, especially
    `ADMIN_PASSWORD`, `JWT_SECRET`, and `GRAFANA_ADMIN_PASSWORD`.
 2. Authenticate to `registry.acimisai.com`, pull the tagged image, and start the stack:
-   `docker compose pull && docker compose up -d --force-recreate`
+   `docker compose -f prod.docker-compose.yml pull && docker compose -f prod.docker-compose.yml up -d --force-recreate`
 3. Verify the public endpoint:
    `curl http://localhost:2312/api/health`
 
-The app is available at `http://localhost:2312`. To stop the container while
-keeping the named database volume, run `docker compose down`.
+The app is available at `http://localhost:2312`. Its SQLite database is
+stored in `./data/aci-platform.sqlite`. To stop the container while keeping
+the database, run `docker compose -f prod.docker-compose.yml down`.
 
 ## Security runbook
 
