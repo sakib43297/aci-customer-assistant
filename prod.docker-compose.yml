@@ -16,7 +16,7 @@ services:
       JWT_ISSUER: ${JWT_ISSUER:?Set JWT_ISSUER in .env or the shell before starting}
       JWT_AUDIENCE: ${JWT_AUDIENCE:?Set JWT_AUDIENCE in .env or the shell before starting}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-    volumes: [aci-customer-assistant-data:/project]
+    volumes: [./data:/project]
     networks: [private]
     expose: ["8080"]
     healthcheck:
@@ -74,7 +74,6 @@ services:
       retries: 3
 
 volumes:
-  aci-customer-assistant-data:
   prometheus-data:
   grafana-data:
 
