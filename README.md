@@ -22,14 +22,21 @@ and bind only to configurable loopback host ports. Metrics and documentation
 paths are restricted at Nginx.
 
 1. Set deployment values in a shell or local `.env` file, especially
-   `ADMIN_PASSWORD`, `JWT_SECRET`, and `GRAFANA_ADMIN_PASSWORD`.
+   `ADMIN_PASSWORD`, `JWT_SECRET`, and `TRUSTED_PROXY_CIDRS`.
 2. Authenticate to `registry.acimisai.com`, pull the tagged image, and start the stack:
-   `docker compose pull && docker compose up -d --force-recreate`
+   `docker compose -f prod.docker-compose.yml pull && docker compose -f prod.docker-compose.yml up -d --force-recreate --remove-orphans`
 3. Verify the public endpoint:
    `curl http://localhost:2312/api/health`
 
-The app is available at `http://localhost:2312`. To stop the container while
-keeping the named database volume, run `docker compose down`.
+The app is available at `http://localhost:2312`. SQLite is persisted in
+`./data/aci-platform.sqlite`, Prometheus in `./docker-data/prometheus`, and
+Grafana in `./docker-data/grafana`. To stop the stack while keeping data, run
+`docker compose -f prod.docker-compose.yml down`.
+
+Before replacing an older named Prometheus or Grafana volume, copy its
+contents into `./docker-data/prometheus` or `./docker-data/grafana` and
+verify the backup. Do not use `docker compose down -v`, because it can remove
+persistent monitoring data.
 
 ## Security runbook
 

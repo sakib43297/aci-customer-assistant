@@ -7,6 +7,13 @@ dist
 .env.*
 !.env.example
 .git
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+data/
+docker-data/
+uploads/
 .DS_Store
 npm-debug.log*
 *.map
